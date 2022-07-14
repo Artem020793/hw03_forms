@@ -8,11 +8,13 @@ from .forms import PostForm
 COUNT_POSTS = 10
 User = get_user_model()
 
+
 def get_paginator_obj(request, posts, COUNT_POSTS):
     paginator = Paginator(posts, COUNT_POSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return page_obj
+
 
 def index(request):
     post_list = Post.objects.select_related('author').all()
