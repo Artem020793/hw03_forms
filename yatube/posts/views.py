@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Post, Group, User
-from django.conf import settings
 from django.core.paginator import Paginator
 from django.contrib.auth import get_user_model
 from .forms import PostForm
@@ -14,7 +13,6 @@ def get_paginator_obj(request, posts, COUNT_POSTS):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return page_obj
-    
 
 def index(request):
     post_list = Post.objects.select_related('author').all()
