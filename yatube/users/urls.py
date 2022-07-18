@@ -1,10 +1,17 @@
-from django.contrib.auth.views import (LoginView, 
+from django.contrib.auth.views import (LoginView,
+
     LogoutView,
-    PasswordChangeView, 
-    PasswordChangeDoneView, 
+    
+    PasswordChangeView,
+    
+    PasswordChangeDoneView,
+    
     PasswordResetView,
-    PasswordResetDoneView, 
+    
+    PasswordResetDoneView,
+    
     PasswordResetCompleteView,
+    
     PasswordResetConfirmView)
 from django.urls import path, reverse_lazy
 
