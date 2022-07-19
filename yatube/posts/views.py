@@ -7,7 +7,6 @@ from .forms import PostForm
 from .models import Post, Group, User
 
 COUNT_POSTS = 10
-Users = get_user_model()
 
 
 def get_paginator_obj(request, posts, COUNT_POSTS):
@@ -18,7 +17,7 @@ def get_paginator_obj(request, posts, COUNT_POSTS):
 
 
 def index(request):
-    post_list = Post.objects.select_related('author')
+    post_list = Post.objects.select_related('author', 'group')
     page_obj = get_paginator_obj(request, post_list, COUNT_POSTS)
     context = {
         'page_obj': page_obj,
@@ -39,7 +38,7 @@ def group_posts(request, slug):
 
 def profile(request, username):
     author = get_object_or_404(User, username=username)
-    user_posts = Post.objects.all().filter(author__username=username)
+    user_posts = Post.objects.select_related().filter(author=author).all()
     page_obj = get_paginator_obj(request, user_posts, COUNT_POSTS)
     context = {
         'author': author,
@@ -62,7 +61,7 @@ def post_create(request):
     if form.is_valid():
         create_post = form.save(commit=False)
         create_post.author = request.user
-        create_post.save()
+        form.save()
 
         return redirect('posts:profile', create_post.author)
 
