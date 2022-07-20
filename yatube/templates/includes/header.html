@@ -20,6 +20,7 @@
             <a class="nav-link {% if view_name == 'about:tech' %}active{% endif %}"
               href="{% url 'about:tech' %}">Технологии</a>
           </li>
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link {% if view_name == 'posts:post_create' %}active{% endif %}"
               href="{% url 'posts:post_create' %}">Новая запись</a>
@@ -32,8 +33,9 @@
             <a class="nav-link" 
               href="{% url 'logout' %}">Выйти</a>
           </li>
-          {% if user.is_authenticated %}
-            <li>Пользователь: {{ user.username }}</li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'posts:profile' user.username %}">Пользователь: {{ user.username }}</a>
+          </li>
           {% else %}
           <li class="nav-item {% if view_name == 'users:login' %}active{% endif %}">
             <a class="nav-link" 
