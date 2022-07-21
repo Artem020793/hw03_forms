@@ -8,7 +8,7 @@ from .models import Post, Group, User
 COUNT_POSTS = 10
 
 
-def get_paginator_obj(request, posts, COUNT_POSTS):
+def get_paginator_obj(request, posts):
     paginator = Paginator(posts, COUNT_POSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -17,7 +17,7 @@ def get_paginator_obj(request, posts, COUNT_POSTS):
 
 def index(request):
     post_list = Post.objects.select_related('author', 'group')
-    page_obj = get_paginator_obj(request, post_list, COUNT_POSTS)
+    page_obj = get_paginator_obj(request, post_list)
     context = {
         'page_obj': page_obj,
     }
@@ -27,7 +27,7 @@ def index(request):
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.select_related('author')
-    page_obj = get_paginator_obj(request, posts, COUNT_POSTS)
+    page_obj = get_paginator_obj(request, posts)
     context = {
         'group': group,
         'page_obj': page_obj,
@@ -38,7 +38,7 @@ def group_posts(request, slug):
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     user_posts = Post.objects.select_related().filter(author=author).all()
-    page_obj = get_paginator_obj(request, user_posts, COUNT_POSTS)
+    page_obj = get_paginator_obj(request, user_posts)
     context = {
         'author': author,
         'page_obj': page_obj,
