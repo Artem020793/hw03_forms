@@ -1,3 +1,57 @@
-# backend_community_homework
+### Проект Yatube v2
 
-[![CI](https://github.com/yandex-praktikum/hw03_forms/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw03_forms/actions/workflows/python-app.yml)
+### Описание 
+Yatube - это социальная сеть с авторизацией, персональными лентами, комментариями и подписками на авторов статей.
+### Функционал
+1. Создано и подключено приложение core.
+2. Создано и подключено приложение about.
+3. Подключено приложение django.contrib.auth, его urls.py подключен к основному urls.py.
+4. Создано и подключено приложение users.
+5. Создана страница пользователя c постами пользователя profile/<username>/;
+6. Создана навигация по разделам.
+7. Ссылка «Новая запись» добавлена в шапку сайта. Она видна только авторизованным пользователям и ведёт на страницу /create/.
+8. На странице /create/ создана форма для добавления новой публикации.
+9. Добавлена страница редактирования записи с адресом /posts/<post_id>/edit/. View-функцию для этой страницы post_edit().
+
+### Запуск проекта в dev-режиме
+1. Клонировать репозиторий:
+2. Перейти в папку с проектом:
+3. Установить виртуальное окружение для проекта:
+```
+python -m venv venv
+``` 
+4. Активировать виртуальное окружение для проекта:
+```
+# для OS Lunix и MacOS
+source venv/bin/activate
+
+# для OS Windows
+source venv/Scripts/activate
+```
+5. Установить зависимости:
+```
+python3 -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+6. Выполнить миграции на уровне проекта:
+```
+cd yatube
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+7. Запустить проект локально:
+```
+python3 manage.py runserver
+
+# адрес запущенного проекта
+http://127.0.0.1:8000
+```
+8. Зарегистирировать суперпользователя Django:
+```
+python3 manage.py createsuperuser
+
+# адрес панели администратора
+http://127.0.0.1:8000/admin
+```
+### Автор проекта
+Артем Римша
